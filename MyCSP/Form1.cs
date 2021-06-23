@@ -16,5 +16,15 @@ namespace MyCSP
         {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void closeLabel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -1,0 +1,10 @@
+D:\MyProjects\.Net_p\MyCSP\bin\Debug\MyCSP.exe.config
+D:\MyProjects\.Net_p\MyCSP\bin\Debug\MyCSP.exe
+D:\MyProjects\.Net_p\MyCSP\bin\Debug\MyCSP.pdb
+D:\MyProjects\.Net_p\MyCSP\obj\Debug\MyCSP.csproj.AssemblyReference.cache
+D:\MyProjects\.Net_p\MyCSP\obj\Debug\MyCSP.Form1.resources
+D:\MyProjects\.Net_p\MyCSP\obj\Debug\MyCSP.Properties.Resources.resources
+D:\MyProjects\.Net_p\MyCSP\obj\Debug\MyCSP.csproj.GenerateResource.cache
+D:\MyProjects\.Net_p\MyCSP\obj\Debug\MyCSP.csproj.CoreCompileInputs.cache
+D:\MyProjects\.Net_p\MyCSP\obj\Debug\MyCSP.exe
+D:\MyProjects\.Net_p\MyCSP\obj\Debug\MyCSP.pdb
