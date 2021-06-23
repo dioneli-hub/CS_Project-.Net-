@@ -31,12 +31,17 @@ namespace MyCSP
         {
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.sidePanel = new System.Windows.Forms.Panel();
+            this.mainPanel = new System.Windows.Forms.Panel();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.closeLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.sidePanel.SuspendLayout();
+            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -57,29 +62,73 @@ namespace MyCSP
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // sidePanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(226, 423);
-            this.panel1.TabIndex = 2;
+            this.sidePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.sidePanel.Controls.Add(this.button1);
+            this.sidePanel.Controls.Add(this.button2);
+            this.sidePanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.sidePanel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.sidePanel.Location = new System.Drawing.Point(0, 0);
+            this.sidePanel.Name = "sidePanel";
+            this.sidePanel.Size = new System.Drawing.Size(226, 423);
+            this.sidePanel.TabIndex = 2;
+            this.sidePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.sidePanel_MouseDown);
+            this.sidePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.sidePanel_MouseMove);
             // 
-            // panel2
+            // mainPanel
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.panel2.Controls.Add(this.closeLabel);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel2.Location = new System.Drawing.Point(226, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(449, 423);
-            this.panel2.TabIndex = 3;
+            this.mainPanel.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.mainPanel.Controls.Add(this.textBox5);
+            this.mainPanel.Controls.Add(this.textBox4);
+            this.mainPanel.Controls.Add(this.textBox3);
+            this.mainPanel.Controls.Add(this.textBox2);
+            this.mainPanel.Controls.Add(this.textBox1);
+            this.mainPanel.Controls.Add(this.closeLabel);
+            this.mainPanel.Controls.Add(this.label1);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.mainPanel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.mainPanel.Location = new System.Drawing.Point(226, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(449, 423);
+            this.mainPanel.TabIndex = 3;
+            this.mainPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mainPanel_MouseDown);
+            this.mainPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mainPanel_MouseMove);
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(34, 186);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 20);
+            this.textBox5.TabIndex = 6;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(34, 228);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 5;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(34, 269);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 4;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(34, 143);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 3;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(34, 104);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 2;
             // 
             // closeLabel
             // 
@@ -92,6 +141,8 @@ namespace MyCSP
             this.closeLabel.Text = "X";
             this.closeLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.closeLabel.Click += new System.EventHandler(this.closeLabel_Click);
+            this.closeLabel.MouseEnter += new System.EventHandler(this.closeLabel_MouseEnter);
+            this.closeLabel.MouseLeave += new System.EventHandler(this.closeLabel_MouseLeave);
             // 
             // label1
             // 
@@ -110,12 +161,14 @@ namespace MyCSP
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(675, 423);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.mainPanel);
+            this.Controls.Add(this.sidePanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.sidePanel.ResumeLayout(false);
+            this.mainPanel.ResumeLayout(false);
+            this.mainPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -124,10 +177,15 @@ namespace MyCSP
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel sidePanel;
+        private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label closeLabel;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
