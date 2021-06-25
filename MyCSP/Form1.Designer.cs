@@ -29,44 +29,22 @@ namespace MyCSP
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.sidePanel = new System.Windows.Forms.Panel();
+            this.addTaskBox = new System.Windows.Forms.TextBox();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tasksList = new System.Windows.Forms.CheckedListBox();
             this.closeLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.AddTaskButton = new System.Windows.Forms.Button();
             this.sidePanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(28, 305);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(158, 46);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(28, 357);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(158, 46);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // sidePanel
             // 
             this.sidePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.sidePanel.Controls.Add(this.button1);
-            this.sidePanel.Controls.Add(this.button2);
+            this.sidePanel.Controls.Add(this.AddTaskButton);
+            this.sidePanel.Controls.Add(this.addTaskBox);
             this.sidePanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.sidePanel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.sidePanel.Location = new System.Drawing.Point(0, 0);
@@ -76,14 +54,18 @@ namespace MyCSP
             this.sidePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.sidePanel_MouseDown);
             this.sidePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.sidePanel_MouseMove);
             // 
+            // addTaskBox
+            // 
+            this.addTaskBox.Location = new System.Drawing.Point(28, 300);
+            this.addTaskBox.Name = "addTaskBox";
+            this.addTaskBox.Size = new System.Drawing.Size(158, 20);
+            this.addTaskBox.TabIndex = 2;
+            this.addTaskBox.Text = "mjkg";
+            // 
             // mainPanel
             // 
             this.mainPanel.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.mainPanel.Controls.Add(this.textBox5);
-            this.mainPanel.Controls.Add(this.textBox4);
-            this.mainPanel.Controls.Add(this.textBox3);
-            this.mainPanel.Controls.Add(this.textBox2);
-            this.mainPanel.Controls.Add(this.textBox1);
+            this.mainPanel.Controls.Add(this.tasksList);
             this.mainPanel.Controls.Add(this.closeLabel);
             this.mainPanel.Controls.Add(this.label1);
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -95,40 +77,13 @@ namespace MyCSP
             this.mainPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mainPanel_MouseDown);
             this.mainPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mainPanel_MouseMove);
             // 
-            // textBox5
+            // tasksList
             // 
-            this.textBox5.Location = new System.Drawing.Point(34, 186);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 6;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(34, 228);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 5;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(34, 269);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 4;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(34, 143);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 3;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(34, 104);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 2;
+            this.tasksList.FormattingEnabled = true;
+            this.tasksList.Location = new System.Drawing.Point(37, 113);
+            this.tasksList.Name = "tasksList";
+            this.tasksList.Size = new System.Drawing.Size(165, 274);
+            this.tasksList.TabIndex = 2;
             // 
             // closeLabel
             // 
@@ -156,6 +111,16 @@ namespace MyCSP
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // AddTaskButton
+            // 
+            this.AddTaskButton.Location = new System.Drawing.Point(28, 336);
+            this.AddTaskButton.Name = "AddTaskButton";
+            this.AddTaskButton.Size = new System.Drawing.Size(158, 51);
+            this.AddTaskButton.TabIndex = 3;
+            this.AddTaskButton.Text = "Add Task";
+            this.AddTaskButton.UseVisualStyleBackColor = true;
+            this.AddTaskButton.Click += new System.EventHandler(this.AddTaskButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -167,25 +132,20 @@ namespace MyCSP
             this.Name = "Form1";
             this.Text = "Form1";
             this.sidePanel.ResumeLayout(false);
+            this.sidePanel.PerformLayout();
             this.mainPanel.ResumeLayout(false);
-            this.mainPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel sidePanel;
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label closeLabel;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox addTaskBox;
+        private System.Windows.Forms.CheckedListBox tasksList;
+        private System.Windows.Forms.Button AddTaskButton;
     }
 }
 

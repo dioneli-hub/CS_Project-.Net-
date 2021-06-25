@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MyCSP
@@ -40,7 +34,7 @@ namespace MyCSP
         Point lastPoint;
         private void mainPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
                 this.Left += e.X - lastPoint.X;
                 this.Top += e.Y - lastPoint.Y;
@@ -63,8 +57,13 @@ namespace MyCSP
             {
                 this.Left += e.X - lastPoint.X;
                 this.Top += e.Y - lastPoint.Y;
-            }    
+            }
         }
 
+        private void AddTaskButton_Click(object sender, EventArgs e)
+        {
+            tasksList.Items.Add(addTaskBox.Text.ToString());
+            addTaskBox.Clear();
+        }
     }
 }
