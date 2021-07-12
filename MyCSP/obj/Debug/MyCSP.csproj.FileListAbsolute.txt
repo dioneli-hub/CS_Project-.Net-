@@ -8,3 +8,17 @@ D:\MyProjects\.Net_p\MyCSP\obj\Debug\MyCSP.csproj.GenerateResource.cache
 D:\MyProjects\.Net_p\MyCSP\obj\Debug\MyCSP.csproj.CoreCompileInputs.cache
 D:\MyProjects\.Net_p\MyCSP\obj\Debug\MyCSP.exe
 D:\MyProjects\.Net_p\MyCSP\obj\Debug\MyCSP.pdb
+D:\MyProjects\.Net_p\MyCSP\bin\Debug\MySql.Data.dll
+D:\MyProjects\.Net_p\MyCSP\bin\Debug\Google.Protobuf.dll
+D:\MyProjects\.Net_p\MyCSP\bin\Debug\Zstandard.Net.dll
+D:\MyProjects\.Net_p\MyCSP\bin\Debug\K4os.Compression.LZ4.Streams.dll
+D:\MyProjects\.Net_p\MyCSP\bin\Debug\BouncyCastle.Crypto.dll
+D:\MyProjects\.Net_p\MyCSP\bin\Debug\Ubiety.Dns.Core.dll
+D:\MyProjects\.Net_p\MyCSP\bin\Debug\System.Memory.dll
+D:\MyProjects\.Net_p\MyCSP\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\MyProjects\.Net_p\MyCSP\bin\Debug\System.Buffers.dll
+D:\MyProjects\.Net_p\MyCSP\bin\Debug\K4os.Compression.LZ4.dll
+D:\MyProjects\.Net_p\MyCSP\bin\Debug\K4os.Hash.xxHash.dll
+D:\MyProjects\.Net_p\MyCSP\bin\Debug\System.Numerics.Vectors.dll
+D:\MyProjects\.Net_p\MyCSP\bin\Debug\MySql.Data.xml
+D:\MyProjects\.Net_p\MyCSP\obj\Debug\MyCSP.csproj.CopyComplete
