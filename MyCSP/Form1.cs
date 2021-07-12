@@ -76,17 +76,16 @@ namespace MyCSP
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `tasks` WHERE `task` = task AND `is_completed` = is_completed", db.getConnection());
-            //command.Parameters.Add("@t", MySqlDbType.VarChar).Value = task;
-            //command.Parameters.Add("@iC", MySqlDbType.Byte).Value = is_completed;
+            MySqlCommand command = new MySqlCommand("INSERT INTO `tasks` (`task`, `is_completed`) VALUES (@task,  @isC)", db.getConnection());
+            command.Parameters.Add("@task", MySqlDbType.VarChar).Value = task;
+            command.Parameters.Add("@isC", MySqlDbType.Byte).Value = is_completed;
 
-            adapter.SelectCommand = command;
-            adapter.Fill(table);
+            db.openConnection();
 
-            if (table.Rows.Count > 0)
-                MessageBox.Show("Done");
-            else
-                MessageBox.Show("Error");
+            if (command.ExecuteNonQuery() == 1)
+                MessageBox.Show("Task successfully added to DB!");
+
+            db.closeConnection();
         }
     }
 }
