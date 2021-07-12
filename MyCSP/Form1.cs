@@ -67,6 +67,13 @@ namespace MyCSP
             string task = addTaskBox.Text.ToString();
             byte is_completed = 0;
 
+
+            if (task.Replace(" ", "") == "")
+            {
+                MessageBox.Show("Please, enter the task!");
+                return;
+            }
+
             tasksList.Items.Add(task);
             addTaskBox.Clear();
 
@@ -84,6 +91,8 @@ namespace MyCSP
 
             if (command.ExecuteNonQuery() == 1)
                 MessageBox.Show("Task successfully added to DB!");
+            else
+                MessageBox.Show("Something went wrong...");
 
             db.closeConnection();
         }
