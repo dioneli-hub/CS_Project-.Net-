@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -62,8 +64,29 @@ namespace MyCSP
 
         private void AddTaskButton_Click(object sender, EventArgs e)
         {
-            tasksList.Items.Add(addTaskBox.Text.ToString());
+            string task = addTaskBox.Text.ToString();
+            byte is_completed = 0;
+
+            tasksList.Items.Add(task);
             addTaskBox.Clear();
+
+            DB db = new DB();
+
+            DataTable table = new DataTable();
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `tasks` WHERE `task` = task AND `is_completed` = is_completed", db.getConnection());
+            //command.Parameters.Add("@t", MySqlDbType.VarChar).Value = task;
+            //command.Parameters.Add("@iC", MySqlDbType.Byte).Value = is_completed;
+
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+
+            if (table.Rows.Count > 0)
+                MessageBox.Show("Done");
+            else
+                MessageBox.Show("Error");
         }
     }
 }
