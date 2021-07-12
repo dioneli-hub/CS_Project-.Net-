@@ -30,12 +30,12 @@ namespace MyCSP
         private void InitializeComponent()
         {
             this.sidePanel = new System.Windows.Forms.Panel();
+            this.AddTaskButton = new System.Windows.Forms.Button();
             this.addTaskBox = new System.Windows.Forms.TextBox();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.tasksList = new System.Windows.Forms.CheckedListBox();
             this.closeLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.AddTaskButton = new System.Windows.Forms.Button();
             this.sidePanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -53,6 +53,16 @@ namespace MyCSP
             this.sidePanel.TabIndex = 2;
             this.sidePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.sidePanel_MouseDown);
             this.sidePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.sidePanel_MouseMove);
+            // 
+            // AddTaskButton
+            // 
+            this.AddTaskButton.Location = new System.Drawing.Point(28, 336);
+            this.AddTaskButton.Name = "AddTaskButton";
+            this.AddTaskButton.Size = new System.Drawing.Size(158, 51);
+            this.AddTaskButton.TabIndex = 3;
+            this.AddTaskButton.Text = "Add Task";
+            this.AddTaskButton.UseVisualStyleBackColor = true;
+            this.AddTaskButton.Click += new System.EventHandler(this.AddTaskButton_Click);
             // 
             // addTaskBox
             // 
@@ -84,6 +94,7 @@ namespace MyCSP
             this.tasksList.Name = "tasksList";
             this.tasksList.Size = new System.Drawing.Size(165, 274);
             this.tasksList.TabIndex = 2;
+            this.tasksList.SelectedIndexChanged += new System.EventHandler(this.tasksList_SelectedIndexChanged);
             // 
             // closeLabel
             // 
@@ -110,16 +121,6 @@ namespace MyCSP
             this.label1.Text = "Urgent tasks";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // AddTaskButton
-            // 
-            this.AddTaskButton.Location = new System.Drawing.Point(28, 336);
-            this.AddTaskButton.Name = "AddTaskButton";
-            this.AddTaskButton.Size = new System.Drawing.Size(158, 51);
-            this.AddTaskButton.TabIndex = 3;
-            this.AddTaskButton.Text = "Add Task";
-            this.AddTaskButton.UseVisualStyleBackColor = true;
-            this.AddTaskButton.Click += new System.EventHandler(this.AddTaskButton_Click);
             // 
             // Form1
             // 

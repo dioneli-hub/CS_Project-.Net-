@@ -96,5 +96,43 @@ namespace MyCSP
 
             db.closeConnection();
         }
+
+        private void tasksList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            // Get the currently selected item in the CheckedBox.
+            string curItem = tasksList.SelectedItem.ToString();
+
+            // Find the index of the string in the box.
+            int index = tasksList.FindString(curItem);
+            tasksList.SetItemChecked(index, true);
+       
+
+            DB db = new DB();
+            
+            db.openConnection();
+
+
+            MySqlCommand command1 = new MySqlCommand("SELECT `id` FROM `tasks` WHERE `task` = @task", db.getConnection());
+            command1.Parameters.Add("@task", MySqlDbType.VarChar).Value = curItem;
+
+
+            int id;
+            bool isParsable = int.TryParse(command1.ExecuteScalar().ToString(), out id);
+
+            if (isParsable)
+            {
+                MySqlCommand command2 = new MySqlCommand("UPDATE `tasks` SET `is_completed` = 1 WHERE `id` = @id", db.getConnection());
+                command2.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+
+                if (command2.ExecuteNonQuery() == 1)
+                    MessageBox.Show("Successfully checked");
+            }
+            else
+                MessageBox.Show("Could not be parsed.");
+            
+
+            db.closeConnection();
+        }
     }
 }
