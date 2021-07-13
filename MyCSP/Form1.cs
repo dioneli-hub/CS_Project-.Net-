@@ -11,10 +11,27 @@ namespace MyCSP
         public Form1()
         {
             InitializeComponent();
+
+
+            DB db = new DB();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `tasks`", db.getConnection());
+
+            db.openConnection();
+
+            MySqlDataReader DR = command.ExecuteReader();
+            while (DR.Read())
+            {
+                tasksList.Items.Add(DR.GetValue(1).ToString());
+            }
+
+            db.closeConnection();
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
+
+            
 
         }
 
