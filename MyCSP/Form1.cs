@@ -4,7 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace MyCSP
+namespace DayPlanner
 {
     public partial class Form1 : Form
     {
@@ -12,38 +12,8 @@ namespace MyCSP
         {
             InitializeComponent();
 
-
-            DB db = new DB();
-
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `tasks`", db.getConnection());
-
-            db.openConnection();
-
-            MySqlDataReader DR = command.ExecuteReader();
-            while (DR.Read())
-            {
-                string item = DR.GetValue(1).ToString();
-                tasksList.Items.Add(item);
-                int index = tasksList.FindString(item); 
-               
-
-                int id = find_task_id(item);
-
-                
-                if ((id >= 0))
-                {
-                    if ((DR.GetValue(2).ToString() == "True"))
-                    {
-                        tasksList.SetItemChecked(index, true);
-                    }
-                    else
-                    {
-                        tasksList.SetItemChecked(index, false);
-                    }
-                }
-            }
-
-            db.closeConnection();
+            DisplayTasks();
+            
         }
 
        
@@ -126,62 +96,24 @@ namespace MyCSP
 
         private void tasksList_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            // Get the currently selected item in the CheckedBox.
-            string curItem = tasksList.SelectedItem.ToString();
-
-            // Find the index of the string in the box.
-            int index = tasksList.FindString(curItem);
-
-            DB db = new DB();
-            db.openConnection();
-
-            MySqlCommand command1 = new MySqlCommand("SELECT `id` FROM `tasks` WHERE `task` = @task", db.getConnection());
-            command1.Parameters.Add("@task", MySqlDbType.VarChar).Value = curItem;
-
-
-            int id;
-            bool isParsable = int.TryParse(command1.ExecuteScalar().ToString(), out id);
-
-            if (isParsable)
-                if (tasksList.GetItemChecked(index))
-                {
-                    // item checked
-
-                    tasksList.SetItemChecked(index, false);
-
-                    MySqlCommand command3 = new MySqlCommand("UPDATE `tasks` SET `is_completed` = 0 WHERE `id` = @id", db.getConnection());
-                    command3.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
-
-                    if (command3.ExecuteNonQuery() == 1)
-                        MessageBox.Show("Unchecked");
-
-                } else
-                {   
-                    // item not checked
-
-                    tasksList.SetItemChecked(index, true);
-
-                    MySqlCommand command2 = new MySqlCommand("UPDATE `tasks` SET `is_completed` = 1 WHERE `id` = @id", db.getConnection());
-                    command2.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
-
-                    if (command2.ExecuteNonQuery() == 1)
-                        MessageBox.Show("Successfully checked");
-                }
-
-
-            db.closeConnection();
+            CheckedListBoxHandler(tasksList, false);
+            
         }
 
-        private int find_task_id(string item)
+        private void completedTasksList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CheckedListBoxHandler(completedTasksList, false);
+        }
+
+        private int findTaskId(string item)
         {
             DB db = new DB();
             db.openConnection();
 
-            MySqlCommand command1 = new MySqlCommand("SELECT `id` FROM `tasks` WHERE `task` = @task", db.getConnection());
-            command1.Parameters.Add("@task", MySqlDbType.VarChar).Value = item;
+            MySqlCommand command = new MySqlCommand("SELECT `id` FROM `tasks` WHERE `task` = @task", db.getConnection());
+            command.Parameters.Add("@task", MySqlDbType.VarChar).Value = item;
             int id;
-            bool isParsable = int.TryParse(command1.ExecuteScalar().ToString(), out id);
+            bool isParsable = int.TryParse(command.ExecuteScalar().ToString(), out id);
 
             db.closeConnection();
 
@@ -189,6 +121,106 @@ namespace MyCSP
             return -1;
         }
 
+        private void DisplayTasks()
+        {
+            tasksList.Items.Clear();
+            completedTasksList.Items.Clear();
 
+            DB db = new DB();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `tasks`", db.getConnection());
+
+            db.openConnection();
+
+            MySqlDataReader DR = command.ExecuteReader();
+            while (DR.Read())
+            {
+                string item = DR.GetValue(1).ToString();
+                CheckedListBox list;
+                if ((DR.GetValue(2).ToString() == "True"))
+                {
+                    list = completedTasksList;
+                    
+                }
+                else
+                {
+                    list = tasksList;
+                    
+                }
+
+                list.Items.Add(item);
+                int index = list.FindString(item);
+
+
+                int id = findTaskId(item);
+
+
+                if ((id >= 0))
+                {
+                    if ((DR.GetValue(2).ToString() == "True"))
+                    {
+                        list.SetItemChecked(index, true);
+                    }
+                    else
+                    {
+                        list.SetItemChecked(index, false);
+                    }
+                }
+            }
+
+            foreach (int indexChecked in tasksList.CheckedIndices)
+            {
+                completedTasksList.Items.Add(tasksList.Items[indexChecked]);
+            }
+
+                db.closeConnection();
+        }
+
+        private void CheckedListBoxHandler(CheckedListBox list, bool defaultChecked)
+        {
+            // Get the currently selected item in the CheckedBox.
+            string curItem = list.SelectedItem.ToString();
+
+            // Find the index of the string in the box.
+            int index = list.FindString(curItem);
+
+            DB db = new DB();
+            db.openConnection();
+
+
+            int id = findTaskId(curItem);
+
+            if (id >= 0)
+                if (list.GetItemChecked(index))
+                {
+                    // item checked
+
+                    MySqlCommand command3 = new MySqlCommand("UPDATE `tasks` SET `is_completed` = @iC WHERE `id` = @id", db.getConnection());
+                    command3.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+                    command3.Parameters.Add("@iC", MySqlDbType.Int32).Value = defaultChecked;
+
+                    if (command3.ExecuteNonQuery() == 1)
+                        MessageBox.Show("Yes!");
+
+                }
+                else
+                {
+                    // item not checked
+
+                    MySqlCommand command2 = new MySqlCommand("UPDATE `tasks` SET `is_completed` = @iC WHERE `id` = @id", db.getConnection());
+                    command2.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+                    command2.Parameters.Add("@iC", MySqlDbType.Int32).Value = !defaultChecked;
+
+                    if (command2.ExecuteNonQuery() == 1)
+                        MessageBox.Show("Success");
+                }
+
+
+            db.closeConnection();
+            DisplayTasks();
+
+        }
+
+        
     }
 }

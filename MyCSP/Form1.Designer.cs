@@ -1,5 +1,5 @@
 ﻿
-namespace MyCSP
+namespace DayPlanner
 {
     partial class Form1
     {
@@ -33,12 +33,12 @@ namespace MyCSP
             this.AddTaskButton = new System.Windows.Forms.Button();
             this.addTaskBox = new System.Windows.Forms.TextBox();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.doneLabel = new System.Windows.Forms.Label();
+            this.todoLabel = new System.Windows.Forms.Label();
+            this.completedTasksList = new System.Windows.Forms.CheckedListBox();
             this.tasksList = new System.Windows.Forms.CheckedListBox();
             this.closeLabel = new System.Windows.Forms.Label();
             this.mainLabel = new System.Windows.Forms.Label();
-            this.completedTasksList = new System.Windows.Forms.CheckedListBox();
-            this.todoLabel = new System.Windows.Forms.Label();
-            this.doneLabel = new System.Windows.Forms.Label();
             this.sidePanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -93,6 +93,35 @@ namespace MyCSP
             this.mainPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mainPanel_MouseDown);
             this.mainPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mainPanel_MouseMove);
             // 
+            // doneLabel
+            // 
+            this.doneLabel.AutoSize = true;
+            this.doneLabel.Font = new System.Drawing.Font("Segoe Print", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Strikeout))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.doneLabel.Location = new System.Drawing.Point(298, 75);
+            this.doneLabel.Name = "doneLabel";
+            this.doneLabel.Size = new System.Drawing.Size(58, 26);
+            this.doneLabel.TabIndex = 5;
+            this.doneLabel.Text = "DONE";
+            // 
+            // todoLabel
+            // 
+            this.todoLabel.AutoSize = true;
+            this.todoLabel.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.todoLabel.Location = new System.Drawing.Point(79, 75);
+            this.todoLabel.Name = "todoLabel";
+            this.todoLabel.Size = new System.Drawing.Size(64, 26);
+            this.todoLabel.TabIndex = 4;
+            this.todoLabel.Text = "TO DO";
+            // 
+            // completedTasksList
+            // 
+            this.completedTasksList.FormattingEnabled = true;
+            this.completedTasksList.Location = new System.Drawing.Point(245, 113);
+            this.completedTasksList.Name = "completedTasksList";
+            this.completedTasksList.Size = new System.Drawing.Size(165, 274);
+            this.completedTasksList.TabIndex = 3;
+            this.completedTasksList.SelectedIndexChanged += new System.EventHandler(this.completedTasksList_SelectedIndexChanged);
+            // 
             // tasksList
             // 
             this.tasksList.FormattingEnabled = true;
@@ -126,34 +155,6 @@ namespace MyCSP
             this.mainLabel.TabIndex = 0;
             this.mainLabel.Text = "Urgent tasks";
             this.mainLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // completedTasksList
-            // 
-            this.completedTasksList.FormattingEnabled = true;
-            this.completedTasksList.Location = new System.Drawing.Point(245, 113);
-            this.completedTasksList.Name = "completedTasksList";
-            this.completedTasksList.Size = new System.Drawing.Size(165, 274);
-            this.completedTasksList.TabIndex = 3;
-            // 
-            // todoLabel
-            // 
-            this.todoLabel.AutoSize = true;
-            this.todoLabel.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.todoLabel.Location = new System.Drawing.Point(79, 75);
-            this.todoLabel.Name = "todoLabel";
-            this.todoLabel.Size = new System.Drawing.Size(64, 26);
-            this.todoLabel.TabIndex = 4;
-            this.todoLabel.Text = "TO DO";
-            // 
-            // doneLabel
-            // 
-            this.doneLabel.AutoSize = true;
-            this.doneLabel.Font = new System.Drawing.Font("Segoe Print", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Strikeout))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.doneLabel.Location = new System.Drawing.Point(298, 75);
-            this.doneLabel.Name = "doneLabel";
-            this.doneLabel.Size = new System.Drawing.Size(58, 26);
-            this.doneLabel.TabIndex = 5;
-            this.doneLabel.Text = "DONE";
             // 
             // Form1
             // 
