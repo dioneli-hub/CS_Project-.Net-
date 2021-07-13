@@ -22,7 +22,25 @@ namespace MyCSP
             MySqlDataReader DR = command.ExecuteReader();
             while (DR.Read())
             {
-                tasksList.Items.Add(DR.GetValue(1).ToString());
+                string item = DR.GetValue(1).ToString();
+                tasksList.Items.Add(item);
+                int index = tasksList.FindString(item); 
+               
+
+                int id = find_task_id(item);
+
+                
+                if ((id >= 0))
+                {
+                    if ((DR.GetValue(2).ToString() == "True"))
+                    {
+                        tasksList.SetItemChecked(index, true);
+                    }
+                    else
+                    {
+                        tasksList.SetItemChecked(index, false);
+                    }
+                }
             }
 
             db.closeConnection();
@@ -159,5 +177,23 @@ namespace MyCSP
 
             db.closeConnection();
         }
+
+        private int find_task_id(string item)
+        {
+            DB db = new DB();
+            db.openConnection();
+
+            MySqlCommand command1 = new MySqlCommand("SELECT `id` FROM `tasks` WHERE `task` = @task", db.getConnection());
+            command1.Parameters.Add("@task", MySqlDbType.VarChar).Value = item;
+            int id;
+            bool isParsable = int.TryParse(command1.ExecuteScalar().ToString(), out id);
+
+            db.closeConnection();
+
+            if (isParsable) return id;
+            return -1;
+        }
+
+
     }
 }
