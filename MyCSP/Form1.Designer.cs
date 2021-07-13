@@ -35,7 +35,10 @@ namespace MyCSP
             this.mainPanel = new System.Windows.Forms.Panel();
             this.tasksList = new System.Windows.Forms.CheckedListBox();
             this.closeLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.mainLabel = new System.Windows.Forms.Label();
+            this.completedTasksList = new System.Windows.Forms.CheckedListBox();
+            this.todoLabel = new System.Windows.Forms.Label();
+            this.doneLabel = new System.Windows.Forms.Label();
             this.sidePanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -75,9 +78,12 @@ namespace MyCSP
             // mainPanel
             // 
             this.mainPanel.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.mainPanel.Controls.Add(this.doneLabel);
+            this.mainPanel.Controls.Add(this.todoLabel);
+            this.mainPanel.Controls.Add(this.completedTasksList);
             this.mainPanel.Controls.Add(this.tasksList);
             this.mainPanel.Controls.Add(this.closeLabel);
-            this.mainPanel.Controls.Add(this.label1);
+            this.mainPanel.Controls.Add(this.mainLabel);
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.mainPanel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.mainPanel.Location = new System.Drawing.Point(226, 0);
@@ -110,17 +116,44 @@ namespace MyCSP
             this.closeLabel.MouseEnter += new System.EventHandler(this.closeLabel_MouseEnter);
             this.closeLabel.MouseLeave += new System.EventHandler(this.closeLabel_MouseLeave);
             // 
-            // label1
+            // mainLabel
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe Print", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label1.Location = new System.Drawing.Point(122, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(215, 56);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Urgent tasks";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.mainLabel.Font = new System.Drawing.Font("Segoe Print", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.mainLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.mainLabel.Location = new System.Drawing.Point(122, 9);
+            this.mainLabel.Name = "mainLabel";
+            this.mainLabel.Size = new System.Drawing.Size(215, 56);
+            this.mainLabel.TabIndex = 0;
+            this.mainLabel.Text = "Urgent tasks";
+            this.mainLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // completedTasksList
+            // 
+            this.completedTasksList.FormattingEnabled = true;
+            this.completedTasksList.Location = new System.Drawing.Point(245, 113);
+            this.completedTasksList.Name = "completedTasksList";
+            this.completedTasksList.Size = new System.Drawing.Size(165, 274);
+            this.completedTasksList.TabIndex = 3;
+            // 
+            // todoLabel
+            // 
+            this.todoLabel.AutoSize = true;
+            this.todoLabel.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.todoLabel.Location = new System.Drawing.Point(79, 75);
+            this.todoLabel.Name = "todoLabel";
+            this.todoLabel.Size = new System.Drawing.Size(64, 26);
+            this.todoLabel.TabIndex = 4;
+            this.todoLabel.Text = "TO DO";
+            // 
+            // doneLabel
+            // 
+            this.doneLabel.AutoSize = true;
+            this.doneLabel.Font = new System.Drawing.Font("Segoe Print", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Strikeout))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.doneLabel.Location = new System.Drawing.Point(298, 75);
+            this.doneLabel.Name = "doneLabel";
+            this.doneLabel.Size = new System.Drawing.Size(58, 26);
+            this.doneLabel.TabIndex = 5;
+            this.doneLabel.Text = "DONE";
             // 
             // Form1
             // 
@@ -135,6 +168,7 @@ namespace MyCSP
             this.sidePanel.ResumeLayout(false);
             this.sidePanel.PerformLayout();
             this.mainPanel.ResumeLayout(false);
+            this.mainPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -142,11 +176,14 @@ namespace MyCSP
         #endregion
         private System.Windows.Forms.Panel sidePanel;
         private System.Windows.Forms.Panel mainPanel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label mainLabel;
         private System.Windows.Forms.Label closeLabel;
         private System.Windows.Forms.TextBox addTaskBox;
         private System.Windows.Forms.CheckedListBox tasksList;
         private System.Windows.Forms.Button AddTaskButton;
+        private System.Windows.Forms.Label todoLabel;
+        private System.Windows.Forms.CheckedListBox completedTasksList;
+        private System.Windows.Forms.Label doneLabel;
     }
 }
 
