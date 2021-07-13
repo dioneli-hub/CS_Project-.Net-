@@ -79,9 +79,6 @@ namespace MyCSP
 
             DB db = new DB();
 
-            DataTable table = new DataTable();
-
-            MySqlDataAdapter adapter = new MySqlDataAdapter();
 
             MySqlCommand command = new MySqlCommand("INSERT INTO `tasks` (`task`, `is_completed`) VALUES (@task,  @isC)", db.getConnection());
             command.Parameters.Add("@task", MySqlDbType.VarChar).Value = task;
@@ -105,13 +102,9 @@ namespace MyCSP
 
             // Find the index of the string in the box.
             int index = tasksList.FindString(curItem);
-            tasksList.SetItemChecked(index, true);
-       
 
             DB db = new DB();
-            
             db.openConnection();
-
 
             MySqlCommand command1 = new MySqlCommand("SELECT `id` FROM `tasks` WHERE `task` = @task", db.getConnection());
             command1.Parameters.Add("@task", MySqlDbType.VarChar).Value = curItem;
@@ -121,16 +114,31 @@ namespace MyCSP
             bool isParsable = int.TryParse(command1.ExecuteScalar().ToString(), out id);
 
             if (isParsable)
-            {
-                MySqlCommand command2 = new MySqlCommand("UPDATE `tasks` SET `is_completed` = 1 WHERE `id` = @id", db.getConnection());
-                command2.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+                if (tasksList.GetItemChecked(index))
+                {
+                    // item checked
 
-                if (command2.ExecuteNonQuery() == 1)
-                    MessageBox.Show("Successfully checked");
-            }
-            else
-                MessageBox.Show("Could not be parsed.");
-            
+                    tasksList.SetItemChecked(index, false);
+
+                    MySqlCommand command3 = new MySqlCommand("UPDATE `tasks` SET `is_completed` = 0 WHERE `id` = @id", db.getConnection());
+                    command3.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+
+                    if (command3.ExecuteNonQuery() == 1)
+                        MessageBox.Show("Unchecked");
+
+                } else
+                {   
+                    // item not checked
+
+                    tasksList.SetItemChecked(index, true);
+
+                    MySqlCommand command2 = new MySqlCommand("UPDATE `tasks` SET `is_completed` = 1 WHERE `id` = @id", db.getConnection());
+                    command2.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+
+                    if (command2.ExecuteNonQuery() == 1)
+                        MessageBox.Show("Successfully checked");
+                }
+
 
             db.closeConnection();
         }
