@@ -96,7 +96,7 @@ namespace DayPlanner
 
         private void tasksList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CheckedListBoxHandler(tasksList, false);
+            CheckedListBoxHandler(tasksList, true);
             
         }
 
@@ -176,7 +176,7 @@ namespace DayPlanner
                 db.closeConnection();
         }
 
-        private void CheckedListBoxHandler(CheckedListBox list, bool defaultChecked)
+        private void CheckedListBoxHandler(CheckedListBox list, bool checkSetTo)
         {
             // Get the currently selected item in the CheckedBox.
             string curItem = list.SelectedItem.ToString();
@@ -187,38 +187,21 @@ namespace DayPlanner
             DB db = new DB();
             db.openConnection();
 
-
             int id = findTaskId(curItem);
 
             if (id >= 0)
-                if (list.GetItemChecked(index))
                 {
-                    // item checked
-
                     MySqlCommand command3 = new MySqlCommand("UPDATE `tasks` SET `is_completed` = @iC WHERE `id` = @id", db.getConnection());
                     command3.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
-                    command3.Parameters.Add("@iC", MySqlDbType.Int32).Value = defaultChecked;
+                    command3.Parameters.Add("@iC", MySqlDbType.Int32).Value = checkSetTo;
 
                     if (command3.ExecuteNonQuery() == 1)
                         MessageBox.Show("Yes!");
-
                 }
-                else
-                {
-                    // item not checked
-
-                    MySqlCommand command2 = new MySqlCommand("UPDATE `tasks` SET `is_completed` = @iC WHERE `id` = @id", db.getConnection());
-                    command2.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
-                    command2.Parameters.Add("@iC", MySqlDbType.Int32).Value = !defaultChecked;
-
-                    if (command2.ExecuteNonQuery() == 1)
-                        MessageBox.Show("Success");
-                }
-
+                
 
             db.closeConnection();
             DisplayTasks();
-
         }
 
         
