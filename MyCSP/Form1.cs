@@ -207,8 +207,30 @@ namespace DayPlanner
 
         private bool CheckVisible (string item) 
         {
+            int id = FindTaskId(item);
 
-            return true;
+            DB db = new DB();
+
+            db.openConnection();
+
+            DataTable table = new DataTable();
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `tasks` WHERE `id` = @Id AND `task` = @task AND `is_visible` = @V", db.getConnection());
+            command.Parameters.Add("@task", MySqlDbType.VarChar).Value = item;
+            command.Parameters.Add("@V", MySqlDbType.Int32).Value = 1;
+            command.Parameters.Add("@Id", MySqlDbType.Int32).Value = id;
+
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+
+            db.closeConnection();
+
+            if (table.Rows.Count > 0)
+                return true;
+               
+            return false;
         }
 
         
