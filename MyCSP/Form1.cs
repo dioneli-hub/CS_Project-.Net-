@@ -15,7 +15,6 @@ namespace DayPlanner
             DisplayTasks();
             
         }
-
        
 
         private void closeLabel_Click(object sender, EventArgs e)
@@ -74,7 +73,8 @@ namespace DayPlanner
                 return;
             }
 
-            tasksList.Items.Add(task);
+            if (CheckVisible(task)) tasksList.Items.Add(task); // add a method?
+
             addTaskBox.Clear();
 
             DB db = new DB();
@@ -105,7 +105,7 @@ namespace DayPlanner
             CheckedListBoxHandler(completedTasksList, false);
         }
 
-        private int findTaskId(string item)
+        private int FindTaskId(string item)
         {
             DB db = new DB();
             db.openConnection();
@@ -136,44 +136,49 @@ namespace DayPlanner
             while (DR.Read())
             {
                 string item = DR.GetValue(1).ToString();
-                CheckedListBox list;
-                if ((DR.GetValue(2).ToString() == "True"))
+
+                if (CheckVisible(item))
                 {
-                    list = completedTasksList;
-                    
-                }
-                else
-                {
-                    list = tasksList;
-                    
-                }
-
-                list.Items.Add(item);
-                int index = list.FindString(item);
-
-
-                int id = findTaskId(item);
-
-
-                if ((id >= 0))
-                {
+                    CheckedListBox list;
                     if ((DR.GetValue(2).ToString() == "True"))
                     {
-                        list.SetItemChecked(index, true);
+                        list = completedTasksList;
+
                     }
                     else
                     {
-                        list.SetItemChecked(index, false);
+                        list = tasksList;
+
+                    }
+
+                    list.Items.Add(item);
+                    int index = list.FindString(item);
+
+
+                    int id = FindTaskId(item);
+
+
+                    if ((id >= 0))
+                    {
+                        if ((DR.GetValue(2).ToString() == "True"))
+                        {
+                            list.SetItemChecked(index, true);
+                        }
+                        else
+                        {
+                            list.SetItemChecked(index, false);
+                        }
                     }
                 }
+
+                foreach (int indexChecked in tasksList.CheckedIndices)
+                {
+                    completedTasksList.Items.Add(tasksList.Items[indexChecked]);
+                }
+
             }
 
-            foreach (int indexChecked in tasksList.CheckedIndices)
-            {
-                completedTasksList.Items.Add(tasksList.Items[indexChecked]);
-            }
-
-                db.closeConnection();
+            db.closeConnection();
         }
 
         private void CheckedListBoxHandler(CheckedListBox list, bool checkSetTo)
@@ -181,27 +186,29 @@ namespace DayPlanner
             // Get the currently selected item in the CheckedBox.
             string curItem = list.SelectedItem.ToString();
 
-            // Find the index of the string in the box.
-            int index = list.FindString(curItem);
-
             DB db = new DB();
             db.openConnection();
 
-            int id = findTaskId(curItem);
+            int id = FindTaskId(curItem);
 
             if (id >= 0)
-                {
-                    MySqlCommand command3 = new MySqlCommand("UPDATE `tasks` SET `is_completed` = @iC WHERE `id` = @id", db.getConnection());
-                    command3.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
-                    command3.Parameters.Add("@iC", MySqlDbType.Int32).Value = checkSetTo;
+            {
+                MySqlCommand command3 = new MySqlCommand("UPDATE `tasks` SET `is_completed` = @iC WHERE `id` = @id", db.getConnection());
+                command3.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+                command3.Parameters.Add("@iC", MySqlDbType.Int32).Value = checkSetTo;
 
-                    if (command3.ExecuteNonQuery() == 1)
-                        MessageBox.Show("Yes!");
-                }
-                
-
+                if (command3.ExecuteNonQuery() == 1)
+                    MessageBox.Show("Yes!");
+            }
+            
             db.closeConnection();
             DisplayTasks();
+        }
+
+        private bool CheckVisible (string item) 
+        {
+
+            return true;
         }
 
         
