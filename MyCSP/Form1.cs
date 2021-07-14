@@ -61,6 +61,25 @@ namespace DayPlanner
             }
         }
 
+        private void doneLabel_Click(object sender, EventArgs e)
+        {
+            DB db = new DB();
+            
+
+            MySqlCommand command = new MySqlCommand("UPDATE `tasks` SET `is_visible` = @iV WHERE `is_completed`= @iC", db.getConnection());
+            command.Parameters.Add("@iC", MySqlDbType.Int32).Value = 1;
+            command.Parameters.Add("@iV", MySqlDbType.Int32).Value = 0;
+
+            db.openConnection();
+
+            if (command.ExecuteNonQuery() == 1)
+                MessageBox.Show("Click");
+
+            db.closeConnection();
+
+            DisplayTasks();
+        }
+
         private void AddTaskButton_Click(object sender, EventArgs e)
         {
             string task = addTaskBox.Text.ToString();
@@ -108,12 +127,16 @@ namespace DayPlanner
         private int FindTaskId(string item)
         {
             DB db = new DB();
+
             db.openConnection();
 
+            int id;
             MySqlCommand command = new MySqlCommand("SELECT `id` FROM `tasks` WHERE `task` = @task", db.getConnection());
             command.Parameters.Add("@task", MySqlDbType.VarChar).Value = item;
-            int id;
             bool isParsable = int.TryParse(command.ExecuteScalar().ToString(), out id);
+
+            if (command.ExecuteNonQuery() == 1)
+                MessageBox.Show("Id found");
 
             db.closeConnection();
 
@@ -233,6 +256,6 @@ namespace DayPlanner
             return false;
         }
 
-        
+       
     }
 }

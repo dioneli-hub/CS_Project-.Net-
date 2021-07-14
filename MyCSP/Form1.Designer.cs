@@ -102,6 +102,7 @@ namespace DayPlanner
             this.doneLabel.Size = new System.Drawing.Size(58, 26);
             this.doneLabel.TabIndex = 5;
             this.doneLabel.Text = "DONE";
+            this.doneLabel.Click += new System.EventHandler(this.doneLabel_Click);
             // 
             // todoLabel
             // 
